@@ -14,7 +14,7 @@ export class FileListComponent implements OnInit {
 
   ngOnInit(): void {
     this.fileService.getFiles().subscribe((files) => {
-      console.log('tfiles', files);
+      console.log('files', files);
       this.fileItems = files.map((file) => {
         if (file.type === 'folder') {
           return { ...file, isOpen: false };
@@ -23,5 +23,9 @@ export class FileListComponent implements OnInit {
         return file;
       });
     });
+  }
+
+  onOpenFolder(folder: FileItem): void {
+    folder.isOpen = !folder.isOpen;
   }
 }

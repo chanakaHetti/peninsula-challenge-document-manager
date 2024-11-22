@@ -4,10 +4,22 @@
     <ul *ngFor="let file of fileItems">
       <li>
         <span>{{ file.name }} - {{ file.added }}</span>
-        <button *ngIf="file.type === 'folder'">
+        <button *ngIf="file.type === 'folder'" (click)="onOpenFolder(file)">
           {{ file.isOpen ? "Collapse" : "Expand" }}
         </button>
       </li>
+
+      <div *ngIf="file.type === 'folder' && file.isOpen">
+        <ul *ngFor="let subFile of file.files">
+          <li>
+            <span
+              >{{ subFile.name }} -{{
+                subFile.added | date : "mediumDate"
+              }}</span
+            >
+          </li>
+        </ul>
+      </div>
     </ul>
   </section>
 </div>

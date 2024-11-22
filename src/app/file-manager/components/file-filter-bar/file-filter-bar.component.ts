@@ -7,7 +7,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class FileFilterBarComponent {
   @Output() filterChange = new EventEmitter<string>();
-  @Output() sortDirectionChange = new EventEmitter<'name' | 'date'>();
+  @Output() sortChange = new EventEmitter<'name' | 'date'>();
   @Output() sortOrderChange = new EventEmitter<'asc' | 'desc'>();
 
   onFilterChange(event: Event): void {
@@ -19,7 +19,7 @@ export class FileFilterBarComponent {
     const sortValue = (event.target as HTMLInputElement).value as
       | 'name'
       | 'date';
-    this.filterChange.emit(sortValue);
+    this.sortChange.emit(sortValue);
   }
 
   onSortOrderChange(event: Event): void {

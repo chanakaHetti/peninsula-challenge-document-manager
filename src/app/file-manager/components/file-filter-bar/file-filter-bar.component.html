@@ -7,17 +7,17 @@
 
   |
 
-  <label for="sortby">Sort by</label>
-  <select name="sortby" id="sortby" (change)="onSortChange($event)">
+  <label>Sort by:</label>
+  <select (change)="onSortChange($event)">
     <option value="name">Name</option>
     <option value="date">Date</option>
   </select>
 
   |
 
-  <label for="sortorder">Sort order</label>
-  <select name="sortorder" id="sortorder" (change)="onSortOrderChange($event)">
+  <label>Sort order:</label>
+  <select (change)="onSortOrderChange($event)">
     <option value="asc">Ascending</option>
-    <option value="desc">Descending</option>
+    <option value="desc">descending</option>
   </select>
 </div>

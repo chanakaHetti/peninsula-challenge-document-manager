@@ -1,1 +1,13 @@
-<p>file-list works!</p>
+<div>
+  <section>
+    <h3>Documents List</h3>
+    <ul *ngFor="let file of fileItems">
+      <li>
+        <span>{{ file.name }} - {{ file.added }}</span>
+        <button *ngIf="file.type === 'folder'">
+          {{ file.isOpen ? "Collapse" : "Expand" }}
+        </button>
+      </li>
+    </ul>
+  </section>
+</div>

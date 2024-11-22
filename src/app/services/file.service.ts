@@ -1,9 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { FileItem } from '../models/file';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FileService {
+  constructor(private http: HttpClient) {}
 
-  constructor() { }
+  getFiles(): Observable<FileItem[]> {
+    return this.http.get<FileItem[]>('assets/mock-data/documents.json');
+  }
 }

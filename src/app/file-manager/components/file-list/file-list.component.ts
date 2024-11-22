@@ -28,4 +28,16 @@ export class FileListComponent implements OnInit {
   onOpenFolder(folder: FileItem): void {
     folder.isOpen = !folder.isOpen;
   }
+
+  onFilterChange(value: string): void {
+    console.log(value);
+  }
+
+  onSortDirectionChange(value: 'name' | 'date'): void {
+    console.log(value);
+  }
+
+  onSortOrderChange(value: 'asc' | 'desc'): void {
+    console.log(value);
+  }
 }

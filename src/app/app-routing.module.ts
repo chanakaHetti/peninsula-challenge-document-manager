@@ -1,10 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { FileListComponent } from './file-manager/components/file-list/file-list.component';
+
+const routes: Routes = [
+  { path: '', redirectTo: '/files', pathMatch: 'full' },
+  { path: 'files', component: FileListComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

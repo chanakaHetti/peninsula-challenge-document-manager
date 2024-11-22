@@ -9,6 +9,7 @@ import { FileService } from 'src/app/services/file.service';
 })
 export class FileListComponent implements OnInit {
   fileItems: FileItem[] = [];
+  filteredFileItems: FileItem[] = [];
 
   constructor(private fileService: FileService) {}
 
@@ -22,6 +23,8 @@ export class FileListComponent implements OnInit {
 
         return file;
       });
+
+      this.filteredFileItems = this.fileItems;
     });
   }
 
@@ -30,7 +33,10 @@ export class FileListComponent implements OnInit {
   }
 
   onFilterChange(value: string): void {
-    console.log(value);
+    const searchTerm = value;
+    this.filteredFileItems = this.fileItems.filter((file) =>
+      file.name.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase())
+    );
   }
 
   onSortDirectionChange(value: 'name' | 'date'): void {

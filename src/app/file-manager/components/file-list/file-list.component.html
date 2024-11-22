@@ -11,7 +11,7 @@
 
   <section>
     <h3>Documents List</h3>
-    <ul *ngFor="let file of fileItems">
+    <ul *ngFor="let file of filteredFileItems">
       <li>
         <span>{{ file.name }} - {{ file.added }}</span>
         <button *ngIf="file.type === 'folder'" (click)="onOpenFolder(file)">

@@ -1,11 +1,12 @@
 <div>
   <section>
     <app-file-filter-bar
+      [sortBy]="sortBy"
+      [sortOrder]="sortOrder"
       (filterChange)="onFilterChange($event)"
-      (sortChange)="onSortChange($event)"
+      (sortDirectionChange)="onSortDirectionChange($event)"
       (sortOrderChange)="onSortOrderChange($event)"
-    >
-    </app-file-filter-bar>
+    ></app-file-filter-bar>
   </section>
 
   <hr />
@@ -23,10 +24,7 @@
       <div *ngIf="file.type === 'folder' && file.isOpen">
         <ul *ngFor="let subFile of file.files">
           <li>
-            <span
-              >{{ subFile.name }} -
-              {{ subFile.added | date : "mediumDate" }}</span
-            >
+            <span>{{ subFile.name }} - {{ subFile.added }}</span>
           </li>
         </ul>
       </div>

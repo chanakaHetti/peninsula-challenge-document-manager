@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FileItem } from 'src/app/models/file';
+
+import { FileItem, SortBy, SortOrder } from 'src/app/models/file';
+import { FileSortService } from 'src/app/services/file-sort.service';
 import { FileService } from 'src/app/services/file.service';
 
 @Component({
@@ -10,10 +12,13 @@ import { FileService } from 'src/app/services/file.service';
 export class FileListComponent implements OnInit {
   fileItems: FileItem[] = [];
   filteredFileItems: FileItem[] = [];
-  sortBy: 'name' | 'date' = 'name';
-  sortOrder: 'asc' | 'desc' = 'asc';
+  sortBy: SortBy = 'name';
+  sortOrder: SortOrder = 'asc';
 
-  constructor(private fileService: FileService) {}
+  constructor(
+    private fileService: FileService,
+    private fileSortService: FileSortService
+  ) {}
 
   ngOnInit(): void {
     this.fileService.getFiles().subscribe((files) => {
@@ -41,30 +46,22 @@ export class FileListComponent implements OnInit {
     );
   }
 
-  sort(sortBy: 'name' | 'date', sortOrder: 'asc' | 'desc'): void {
-    console.log('sortBy', sortBy, sortOrder);
-    this.filteredFileItems.sort((a, b) => {
-      switch (sortBy) {
-        case 'name':
-          return sortOrder === 'asc'
-            ? a.name.localeCompare(b.name)
-            : b.name.localeCompare(b.name);
-        case 'date':
-          const dateA = a.added ? new Date(a.added).getTime() : 0;
-          const dateB = b.added ? new Date(b.added).getTime() : 0;
-          return sortOrder === 'asc' ? dateB - dateA : dateA - dateB;
-        default:
-          return 0;
-      }
-    });
+  sort(sortBy: SortBy, sortOrder: SortOrder): void {
+    this.filteredFileItems = this.fileSortService.sort(
+      this.filteredFileItems,
+      sortBy,
+      sortOrder
+    );
   }
 
-  onSortChange(value: 'name' | 'date'): void {
+  onSortDirectionChange(value: SortBy): void {
+    console.log(value);
     this.sortBy = value;
     this.sort(value, this.sortOrder);
   }
 
-  onSortOrderChange(value: 'asc' | 'desc'): void {
+  onSortOrderChange(value: SortOrder): void {
+    console.log(value);
     this.sortOrder = value;
     this.sort(this.sortBy, value);
   }
